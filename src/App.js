@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Quiz from './components/Quiz'
-
+import "./SCSS/App.scss"
 export default function App() {
     const [started, setStarted] = useState(false)
 
