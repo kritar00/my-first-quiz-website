@@ -8,7 +8,7 @@ export default function App() {
         <main>
             {started ?
                 <Quiz />
-                : <div>
+                : <div className='start--page'>
                     <h1>Quizzical</h1>
                     <h4>Some description</h4>
                     <button onClick={() => setStarted(!started)}>Start quiz</button>

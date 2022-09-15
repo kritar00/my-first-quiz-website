@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Karla';
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    background: url("../assets/images/intro-page.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+
+    .start--page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+
+        h1 {
+            color: #293264;
+        }
+
+        button {
+            margin-top: 16px;
+            width: 193px;
+            height: 52px;
+            border-radius: 15px;
+            border: none;
+            color: #F5F7FB;
+            background-color: #4D5B9E;
+        }
+    }
+
+    .quiz--container {
+        border: 5px solid black;
+        height: 100%;
+        width: 1500px;
+
+        .question--container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            h3 {
+                font-weight: 700;
+                font-size: 1.8rem;
+                color: #293264;
+            }
+
+            .answers--container {
+                display: flex;
+                gap: 10px;
+
+                .just--button {
+                    background-color: transparent;
+                    border: 1.7px solid #4D5B9E;
+                    border-radius: 10px;
+                    min-width: 85.92px;
+                    min-height: 30.65px;
+                    padding: 0 12px;
+                }
+
+                .selected--button {
+                    background-color: #FFB79D;
+                    border: 1.7px solid #4D5B9E;
+                    border-radius: 10px;
+                    min-width: 85.92px;
+                    height: 30.65px;
+                    padding: 0 12px;
+                }
+            }
+
+
+
+        }
+    }
+
+}

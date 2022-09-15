@@ -34,7 +34,6 @@ export default function Quiz(props) {
 
     }, [])
     console.log(trivia);
-    // console.log(answer);
 
     useEffect(() => {
         let correct = 0
@@ -58,7 +57,7 @@ export default function Quiz(props) {
     }
 
     function scoring() {
-
+        setOver(prevState => !prevState)
     }
 
     return (
@@ -68,7 +67,7 @@ export default function Quiz(props) {
                     <Answers key={value.id} question={value.question} id={value.id} incorrectAnswers={value.incorrectAnswers} correctAnswer={value.correctAnswer} isSelected={value.isSelected} handleAnswer={handleAnswer} />
                 )
             })}
-            <button onClick={scoring}>Check Answers</button>
+            {over ? <h1>You have score: {score}</h1> : <button onClick={scoring}>Check Answers</button>}
         </div>
     )
 }
