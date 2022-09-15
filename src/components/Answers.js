@@ -6,18 +6,20 @@ export default function Answers(props) {
     // const [options, setOptions] = useState([])
 
     const incorrectElements = props.incorrectAnswers.map(option => {
+        const incorrectClassName = `${props.isSelected === option ? "selected--button" : "just--button"} ${(props.over && props.isSelected === option) && "incorrect"}`
         return (
-            <button className={props.isSelected === option ? "selected--button" : "just--button"}
+            <button className={incorrectClassName}
                 key={nanoid()} onClick={(event) => props.handleAnswer(event, props.id, option)}
             >
                 {option}
             </button>
         )
     })
-
+    const correctClassName = `${props.isSelected === props.correctAnswer ? "selected--button" : "just--button"}\
+                                ${props.over && "correct"}`
     const correctElement =
         <button key={nanoid()}
-            className={props.isSelected === props.correctAnswer ? "selected--button" : "just--button"}
+            className={correctClassName}
             onClick={(event) => props.handleAnswer(event, props.id, props.correctAnswer)}
         >
             {props.correctAnswer}

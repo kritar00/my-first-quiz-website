@@ -61,13 +61,19 @@ export default function Quiz(props) {
     }
 
     return (
-        <div className='quiz--container'> {
-            trivia.map((value, index) => {
-                return (
-                    <Answers key={value.id} question={value.question} id={value.id} incorrectAnswers={value.incorrectAnswers} correctAnswer={value.correctAnswer} isSelected={value.isSelected} handleAnswer={handleAnswer} />
-                )
-            })}
-            {over ? <h1>You have score: {score}</h1> : <button onClick={scoring}>Check Answers</button>}
-        </div>
+        <>
+            <div className='quiz--container'> {
+                trivia.map((value, index) => {
+                    return (
+                        <Answers over={over} key={value.id} question={value.question} id={value.id} incorrectAnswers={value.incorrectAnswers} correctAnswer={value.correctAnswer} isSelected={value.isSelected} handleAnswer={handleAnswer} />
+                    )
+                })}
+            </div>
+            {over ? <div className="ended">
+                <h1>You have score: {score}/10</h1>
+                <button className="restart" onClick={() => props.onClick()}>Restart Game</button>
+            </div> :
+                <button className="checkAnswer" onClick={scoring}>Check Answers</button>}
+        </>
     )
 }
