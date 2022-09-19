@@ -5,31 +5,34 @@ import { nanoid } from "nanoid"
 export default function Answers(props) {
     // const [options, setOptions] = useState([])
 
-    const incorrectElements = props.incorrectAnswers.map(option => {
-        const incorrectClassName = `${props.isSelected === option ? "selected--button" : "just--button"} ${(props.over && props.isSelected === option) && "incorrect"}`
+    const answers = props.answers.map(option => {
+        const answerClassName = `${props.isSelected === option ? "selected--button" : "just--button"}`
         return (
-            <button className={incorrectClassName}
+            <button className={answerClassName} style={{ backgroundColor: props.over && (props.correctAnswer === option ? "#94D7A2" : "rgba(214, 63, 63, 0.842)") }}
                 key={nanoid()} onClick={(event) => props.handleAnswer(event, props.id, option)}
             >
                 {option}
             </button>
         )
     })
-    const correctClassName = `${props.isSelected === props.correctAnswer ? "selected--button" : "just--button"}\
-                                ${props.over && "correct"}`
-    const correctElement =
-        <button key={nanoid()}
-            className={correctClassName}
-            onClick={(event) => props.handleAnswer(event, props.id, props.correctAnswer)}
-        >
-            {props.correctAnswer}
-        </button>
 
-    incorrectElements.push(correctElement)
+    console.log(answers);
+
+    // const correctClassName = `${props.isSelected === props.correctAnswer ? "selected--button" : "just--button"}\
+    //                             ${props.over && "correct"}`
+    // const correctElement =
+    //     <button key={nanoid()}
+    //         className={correctClassName}
+    //         onClick={(event) => props.handleAnswer(event, props.id, props.correctAnswer)}
+    //     >
+    //         {props.correctAnswer}
+    //     </button>
+
+    // incorrectElements.push(correctElement)
     // console.log(incorrectElements);
-    const options = incorrectElements.sort((a, b) => (
-        a.props.children.localeCompare(b.props.children))
-    )
+    // const options = incorrectElements.sort((a, b) => (
+    //     a.props.children.localeCompare(b.props.children))
+    // )
     // console.log(options);
 
     // useEffect(() => {
@@ -56,9 +59,12 @@ export default function Answers(props) {
 
     return (
         <div className="question--container">
-            <h3>{props.question}</h3>
+            <span>
+                <h3>{props.question}</h3>
+                {props.over && (props.correctAnswer === props.isSelected ? <img className="check--image" alt="correct" src={require("../assets/images/correct.png")} /> : <img className="check--image" alt="incorrect" src={require("../assets/images/incorrect.png")} />)}
+            </span>
             <div className="answers--container">
-                {options}
+                {answers}
             </div>
         </div>
     )

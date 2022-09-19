@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body,
@@ -19,7 +20,7 @@ html {
 
 main {
     background: url("../assets/images/intro-page.png");
-    height: 100%;
+    min-height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -31,7 +32,7 @@ main {
     .checkAnswer {
         margin-top: 12px;
         width: 170px;
-        height: 42px;
+        min-height: 42px;
         border-radius: 8px;
         border: none;
         color: #F5F7FB;
@@ -43,7 +44,12 @@ main {
         margin-top: 12px;
         display: flex;
         gap: 24px;
+        align-items: center;
+
         // flex-direction: column;
+        h1 {
+            font-size: 36px;
+        }
 
         .restart {
             width: 170px;
@@ -79,15 +85,25 @@ main {
     }
 
     .quiz--container {
+        flex-direction: column;
         padding: 20px;
         border-bottom: 1px solid #DBDEF0;
-        height: fit-content;
+        // height: fit-content;
         width: 1200px;
 
         .question--container {
             display: flex;
             flex-direction: column;
             gap: 15px;
+
+            span {
+                display: flex;
+
+                .check--image {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
 
             h3 {
                 font-weight: 700;
@@ -113,21 +129,10 @@ main {
                     border: 1.7px solid #4D5B9E;
                     border-radius: 10px;
                     min-width: 85.92px;
-                    height: 30.65px;
+                    min-height: 30.65px;
                     padding: 0 12px;
                 }
-
-                .correct {
-                    background: #94D7A2;
-                }
-
-                .incorrect {
-                    background-color: rgba(255, 183, 157, 0.5);
-                }
             }
-
-
-
         }
     }
 

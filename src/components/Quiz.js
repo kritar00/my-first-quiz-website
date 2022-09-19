@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import randomInt from "./Helpers"
 import { nanoid } from "nanoid"
 import Answers from "./Answers";
+import * as ReactBootStrap from "react-bootstrap"
 
 export default function Quiz(props) {
     const [trivia, setTrivia] = useState([])
-    const [answer, setAnswer] = useState([])
     const [score, setScore] = useState(0)
     const [over, setOver] = useState(false)
 
@@ -17,12 +17,12 @@ export default function Quiz(props) {
             const data = await res.json()
             // setTrivia(prevState => data)
             setTrivia(prevState => data.map((value) => {
-                // let arr = value.incorrectAnswers
-                // arr.splice(randomInt(0, 4), 0, value.correctAnswer)
+                let arr = value.incorrectAnswers
+                arr.splice(randomInt(0, 4), 0, value.correctAnswer)
                 return {
                     id: value.id,
                     question: value.question,
-                    incorrectAnswers: value.incorrectAnswers,
+                    answers: arr,
                     correctAnswer: value.correctAnswer,
                     isSelected: ""
                 }
@@ -63,14 +63,17 @@ export default function Quiz(props) {
     return (
         <>
             <div className='quiz--container'> {
-                trivia.map((value, index) => {
-                    return (
-                        <Answers over={over} key={value.id} question={value.question} id={value.id} incorrectAnswers={value.incorrectAnswers} correctAnswer={value.correctAnswer} isSelected={value.isSelected} handleAnswer={handleAnswer} />
-                    )
-                })}
+                trivia !== [] ?
+                    (trivia.map((value, index) => {
+                        return (
+                            <Answers over={over} key={value.id} question={value.question} id={value.id} answers={value.answers} correctAnswer={value.correctAnswer} isSelected={value.isSelected} handleAnswer={handleAnswer} />
+                        )
+                    })) :
+                    (<ReactBootStrap.Spinner animation="border" variant="dark" />)
+            }
             </div>
             {over ? <div className="ended">
-                <h1>You have score: {score}/10</h1>
+                <h1>You scored {score}/10 answers</h1>
                 <button className="restart" onClick={() => props.onClick()}>Restart Game</button>
             </div> :
                 <button className="checkAnswer" onClick={scoring}>Check Answers</button>}

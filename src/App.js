@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Quiz from './components/Quiz'
 import "./SCSS/App.scss"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export default function App() {
     const [started, setStarted] = useState(false)
     const startGame = () => setStarted(!started)
