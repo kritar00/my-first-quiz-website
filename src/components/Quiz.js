@@ -3,6 +3,7 @@ import randomInt from "./Helpers"
 import { nanoid } from "nanoid"
 import Answers from "./Answers";
 import * as ReactBootStrap from "react-bootstrap"
+import getQuestions from "../data/data";
 
 export default function Quiz(props) {
     const [trivia, setTrivia] = useState([])
@@ -12,28 +13,28 @@ export default function Quiz(props) {
 
     useEffect(() => {
         console.log("trivia changed");
-        async function getTrivia() {
-            const res = await fetch(`https://the-trivia-api.com/api/questions`)
-            const data = await res.json()
-            // setTrivia(prevState => data)
-            setTrivia(prevState => data.map((value) => {
-                let arr = value.incorrectAnswers
-                arr.splice(randomInt(0, 4), 0, value.correctAnswer)
+        // async function getTrivia() {
+        //     const res = await fetch(``)
+        //     const data = await res.json()
+        // console.log(data);
+        // setTrivia(prevState => data)
+        getQuestions(props.options).then(questions => {
+            return setTrivia(prevState => questions.map((value) => {
+                let arr = value.incorrect_answers
+                arr.splice(randomInt(0, 4), 0, value.correct_answer)
                 return {
-                    id: value.id,
+                    id: nanoid(),
                     question: value.question,
                     answers: arr,
-                    correctAnswer: value.correctAnswer,
+                    correctAnswer: value.correct_answer,
                     isSelected: ""
                 }
             }))
-
-        }
-
-        getTrivia()
-
+        })
+        // }
+        // getTrivia()
     }, [])
-    console.log(trivia);
+    // console.log(trivia);
 
     useEffect(() => {
         let correct = 0

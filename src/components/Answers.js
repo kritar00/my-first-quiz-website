@@ -4,19 +4,26 @@ import { nanoid } from "nanoid"
 
 export default function Answers(props) {
     // const [options, setOptions] = useState([])
-
+    const correct = {
+        backgroundColor: "#94D7A2"
+    }
+    const incorrect = {
+        backgroundColor: "rgba(214, 63, 63, 0.8)",
+        opacity: "0.5"
+    }
+    let n = 5
+    let i = 6
+    console.log(n === 5 && (i === 6 ? correct : incorrect));
     const answers = props.answers.map(option => {
         const answerClassName = `${props.isSelected === option ? "selected--button" : "just--button"}`
         return (
-            <button className={answerClassName} style={{ backgroundColor: props.over && (props.correctAnswer === option ? "#94D7A2" : "rgba(214, 63, 63, 0.842)") }}
+            <button className={answerClassName} style={props.over ? (props.correctAnswer === option ? correct : incorrect) : {}}
                 key={nanoid()} onClick={(event) => props.handleAnswer(event, props.id, option)}
             >
                 {option}
             </button>
         )
     })
-
-    console.log(answers);
 
     // const correctClassName = `${props.isSelected === props.correctAnswer ? "selected--button" : "just--button"}\
     //                             ${props.over && "correct"}`
