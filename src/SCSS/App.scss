@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body,
@@ -18,32 +19,76 @@ html {
 }
 
 main {
-    background: url("../assets/images/intro-page.png");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: #F5F7FB;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1em;
+
+    .title--wrapper {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+
+        .back {
+            cursor: pointer;
+            color: #293264;
+            font-size: 2em;
+        }
+
+        .title {
+            color: #293264;
+            font-size: 3em;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .my-info {
+            z-index: 1;
+        }
+    }
+
+    #topImg {
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 0;
+    }
+
+    #botImg {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 0;
+    }
 
     .checkAnswer {
         margin-top: 12px;
-        width: 170px;
-        height: 42px;
+        min-width: 170px;
+        min-height: 42px;
         border-radius: 8px;
         border: none;
         color: #F5F7FB;
         background-color: #4D5B9E;
         font-size: 14px;
+        cursor: pointer;
+        z-index: 1;
     }
 
     .ended {
         margin-top: 12px;
         display: flex;
         gap: 24px;
+        align-items: center;
+        z-index: 1;
+
         // flex-direction: column;
+        h1 {
+            font-size: 36px;
+        }
 
         .restart {
             width: 170px;
@@ -53,6 +98,7 @@ main {
             color: #F5F7FB;
             background-color: #4D5B9E;
             font-size: 14px;
+            cursor: pointer;
         }
     }
 
@@ -67,6 +113,29 @@ main {
             color: #293264;
         }
 
+        .options--container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+
+            .select {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                justify-content: center;
+
+                .selection {
+                    height: 3em;
+                    color: #293264;
+                    cursor: pointer;
+                    width: 100%;
+                    border-radius: 0.25em;
+                    box-shadow: 0 0 0.6em 0 rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+
         button {
             margin-top: 16px;
             width: 193px;
@@ -75,60 +144,122 @@ main {
             border: none;
             color: #F5F7FB;
             background-color: #4D5B9E;
+            cursor: pointer;
         }
     }
 
     .quiz--container {
-        padding: 20px;
-        border-bottom: 1px solid #DBDEF0;
-        height: fit-content;
-        width: 1200px;
+        flex-direction: column;
+        // padding: 20px;
+        // height: fit-content;
+        max-width: 62.5em;
+        z-index: 1;
 
         .question--container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+
+            span {
+                display: flex;
+                align-items: center;
+
+                .correct {
+                    color: lime;
+                    height: 1.5em;
+                    width: 1.5em;
+                }
+
+                .incorrect {
+                    color: red;
+                    height: 1.5em;
+                    width: 1.5em;
+                }
+            }
 
             h3 {
                 font-weight: 700;
-                font-size: 1.8rem;
+                font-size: 1.5rem;
                 color: #293264;
             }
 
+
+
             .answers--container {
                 display: flex;
-                gap: 10px;
+                gap: 0.625em;
 
                 .just--button {
+                    box-shadow: inset;
                     background-color: transparent;
                     border: 1.7px solid #4D5B9E;
                     border-radius: 10px;
-                    min-width: 85.92px;
-                    min-height: 30.65px;
+                    min-width: 5.37em;
+                    min-height: 1.915625em;
                     padding: 0 12px;
+                    cursor: pointer;
                 }
 
                 .selected--button {
                     background-color: #FFB79D;
                     border: 1.7px solid #4D5B9E;
                     border-radius: 10px;
-                    min-width: 85.92px;
-                    height: 30.65px;
+                    min-width: 5.37em;
+                    min-height: 1.915625em;
                     padding: 0 12px;
-                }
-
-                .correct {
-                    background: #94D7A2;
-                }
-
-                .incorrect {
-                    background-color: rgba(255, 183, 157, 0.5);
+                    cursor: pointer;
                 }
             }
-
-
-
         }
     }
 
+    @media screen and (max-width: 800px) {
+
+        .quiz--container {
+            width: 100%;
+            padding: 1em;
+
+            .question--container {
+                .answers--container {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .just--button {
+                        font-size: 1em;
+                    }
+
+                    .selected--button {
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+
+        .title--wrapper {
+            .back {
+                font-size: 1.5em;
+
+            }
+
+            .title {
+                font-size: 2em;
+            }
+
+            .my-info {
+                font-size: 0.8em;
+                text-decoration: none;
+                color: #FFB79D;
+            }
+        }
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        /* Set the hr color */
+        color: #333;
+        /* old IE */
+        background-color: #333;
+        /* Modern Browsers */
+    }
 }
