@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import randomInt from "./Helpers"
 import { nanoid } from "nanoid"
+import { decode } from "html-entities"
+import { FaCheck, FaTimes } from "react-icons/fa";
+import { FcCheckmark } from "react-icons/fc";
 
 export default function Answers(props) {
     // const [options, setOptions] = useState([])
@@ -11,64 +14,23 @@ export default function Answers(props) {
         backgroundColor: "rgba(214, 63, 63, 0.8)",
         opacity: "0.5"
     }
-    let n = 5
-    let i = 6
-    console.log(n === 5 && (i === 6 ? correct : incorrect));
     const answers = props.answers.map(option => {
         const answerClassName = `${props.isSelected === option ? "selected--button" : "just--button"}`
         return (
             <button className={answerClassName} style={props.over ? (props.correctAnswer === option ? correct : incorrect) : {}}
                 key={nanoid()} onClick={(event) => props.handleAnswer(event, props.id, option)}
             >
-                {option}
+                {decode(option)}
             </button>
         )
     })
-
-    // const correctClassName = `${props.isSelected === props.correctAnswer ? "selected--button" : "just--button"}\
-    //                             ${props.over && "correct"}`
-    // const correctElement =
-    //     <button key={nanoid()}
-    //         className={correctClassName}
-    //         onClick={(event) => props.handleAnswer(event, props.id, props.correctAnswer)}
-    //     >
-    //         {props.correctAnswer}
-    //     </button>
-
-    // incorrectElements.push(correctElement)
-    // console.log(incorrectElements);
-    // const options = incorrectElements.sort((a, b) => (
-    //     a.props.children.localeCompare(b.props.children))
-    // )
-    // console.log(options);
-
-    // useEffect(() => {
-    //     function shuffle(array) {
-    //         let currentIndex = array.length, randomIndex;
-
-    //         // While there remain elements to shuffle.
-    //         while (currentIndex !== 0) {
-
-    //             // Pick a remaining element.
-    //             randomIndex = Math.floor(Math.random() * currentIndex);
-    //             currentIndex--;
-
-    //             // And swap it with the current element.
-    //             [array[currentIndex], array[randomIndex]] = [
-    //                 array[randomIndex], array[currentIndex]];
-    //         }
-
-    //         return array;
-    //     }
-    //     setOptions(shuffle(incorrectElements))
-    // }, [])
 
 
     return (
         <div className="question--container">
             <span>
-                <h3>{props.question}</h3>
-                {props.over && (props.correctAnswer === props.isSelected ? <img className="check--image" alt="correct" src={require("../assets/images/correct.png")} /> : <img className="check--image" alt="incorrect" src={require("../assets/images/incorrect.png")} />)}
+                <h3>{decode(props.question)}</h3>
+                {props.over && (props.correctAnswer === props.isSelected ? <FaCheck className="correct" /> : <FaTimes className="incorrect" />)}
             </span>
             <div className="answers--container">
                 {answers}

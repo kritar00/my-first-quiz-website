@@ -4,6 +4,7 @@ import { nanoid } from "nanoid"
 import Answers from "./Answers";
 import * as ReactBootStrap from "react-bootstrap"
 import getQuestions from "../data/data";
+import { FaArrowLeft } from "react-icons/fa"
 
 export default function Quiz(props) {
     const [trivia, setTrivia] = useState([])
@@ -13,11 +14,6 @@ export default function Quiz(props) {
 
     useEffect(() => {
         console.log("trivia changed");
-        // async function getTrivia() {
-        //     const res = await fetch(``)
-        //     const data = await res.json()
-        // console.log(data);
-        // setTrivia(prevState => data)
         getQuestions(props.options).then(questions => {
             return setTrivia(prevState => questions.map((value) => {
                 let arr = value.incorrect_answers
@@ -45,7 +41,7 @@ export default function Quiz(props) {
         setScore(correct)
     }, [trivia])
 
-    console.log(score);
+    // console.log(score);
 
 
     function handleAnswer(event, id, rec) {
@@ -63,6 +59,11 @@ export default function Quiz(props) {
 
     return (
         <>
+            <div className="title--wrapper">
+                <FaArrowLeft className="back" onClick={() => props.onClick()} />
+                <h1 className="title">Quick Quiz</h1>
+                <a href="https://www.facebook.com/Kritar.00/" rel="noreferrer" target="_blank" className="my-info">My Info</a>
+            </div>
             <div className='quiz--container'> {
                 trivia !== [] ?
                     (trivia.map((value, index) => {
@@ -72,6 +73,7 @@ export default function Quiz(props) {
                     })) :
                     (<ReactBootStrap.Spinner animation="border" variant="dark" />)
             }
+                <hr />
             </div>
             {over ? <div className="ended">
                 <h1>You scored {score}/10 answers</h1>

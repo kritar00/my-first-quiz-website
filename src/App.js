@@ -39,7 +39,7 @@ export default function App() {
             {started ?
                 <Quiz options={options} onClick={startGame} />
                 : <div className='start--page'>
-                    <h1>Quizzical</h1>
+                    <h1>Quick Quiz</h1>
                     <h4>How hard can it be?</h4>
                     <div className='options--container'>
                         <div className='select'>

@@ -25,19 +25,44 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1em;
+
+    .title--wrapper {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+
+        .back {
+            cursor: pointer;
+            color: #293264;
+            font-size: 2em;
+        }
+
+        .title {
+            color: #293264;
+            font-size: 3em;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .my-info {
+            z-index: 1;
+        }
+    }
 
     #topImg {
-        position: absolute;
+        position: fixed;
         right: 0;
         top: 0;
-        // z-index: -1;
+        z-index: 0;
     }
 
     #botImg {
-        position: absolute;
+        position: fixed;
         left: 0;
         bottom: 0;
-        // z-index: -1;
+        z-index: 0;
     }
 
     .checkAnswer {
@@ -50,6 +75,7 @@ main {
         background-color: #4D5B9E;
         font-size: 14px;
         cursor: pointer;
+        z-index: 1;
     }
 
     .ended {
@@ -57,6 +83,7 @@ main {
         display: flex;
         gap: 24px;
         align-items: center;
+        z-index: 1;
 
         // flex-direction: column;
         h1 {
@@ -124,9 +151,9 @@ main {
     .quiz--container {
         flex-direction: column;
         // padding: 20px;
-        border-bottom: 1px solid #DBDEF0;
         // height: fit-content;
-        width: 1000px;
+        max-width: 62.5em;
+        z-index: 1;
 
         .question--container {
             display: flex;
@@ -135,10 +162,18 @@ main {
 
             span {
                 display: flex;
+                align-items: center;
 
-                .check--image {
-                    width: 30px;
-                    height: 30px;
+                .correct {
+                    color: lime;
+                    height: 1.5em;
+                    width: 1.5em;
+                }
+
+                .incorrect {
+                    color: red;
+                    height: 1.5em;
+                    width: 1.5em;
                 }
             }
 
@@ -148,17 +183,19 @@ main {
                 color: #293264;
             }
 
+
+
             .answers--container {
                 display: flex;
-                gap: 10px;
+                gap: 0.625em;
 
                 .just--button {
                     box-shadow: inset;
                     background-color: transparent;
                     border: 1.7px solid #4D5B9E;
                     border-radius: 10px;
-                    min-width: 85.92px;
-                    min-height: 30.65px;
+                    min-width: 5.37em;
+                    min-height: 1.915625em;
                     padding: 0 12px;
                     cursor: pointer;
                 }
@@ -167,8 +204,8 @@ main {
                     background-color: #FFB79D;
                     border: 1.7px solid #4D5B9E;
                     border-radius: 10px;
-                    min-width: 85.92px;
-                    min-height: 30.65px;
+                    min-width: 5.37em;
+                    min-height: 1.915625em;
                     padding: 0 12px;
                     cursor: pointer;
                 }
@@ -176,4 +213,53 @@ main {
         }
     }
 
+    @media screen and (max-width: 800px) {
+
+        .quiz--container {
+            width: 100%;
+            padding: 1em;
+
+            .question--container {
+                .answers--container {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .just--button {
+                        font-size: 1em;
+                    }
+
+                    .selected--button {
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+
+        .title--wrapper {
+            .back {
+                font-size: 1.5em;
+
+            }
+
+            .title {
+                font-size: 2em;
+            }
+
+            .my-info {
+                font-size: 0.8em;
+                text-decoration: none;
+                color: #FFB79D;
+            }
+        }
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        /* Set the hr color */
+        color: #333;
+        /* old IE */
+        background-color: #333;
+        /* Modern Browsers */
+    }
 }
